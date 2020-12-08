@@ -18,3 +18,7 @@ function changeView(e) {
     document.getElementById(contentType).style.display = "block";
 
 }
+
+
+// Need to find out a way to make sure when the checkbox is clicked that button and
+// the checkbox gets deleted
