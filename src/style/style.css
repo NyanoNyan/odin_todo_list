@@ -63,3 +63,14 @@
 .h4-content{
     text-align: center;
 }
+
+.add-form{
+
+    text-align: center;
+    margin: 0 0 20px 0; /* gap */
+}
+
+.tab-content li{
+    margin: 0 0 10px 0; /* gap */
+    list-style:none;
+}
