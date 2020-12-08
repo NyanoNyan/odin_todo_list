@@ -1,0 +1,1 @@
+console.log("hello"),document.getElementById("sidebar").addEventListener("click",(function(e){let t=e.target.textContent,n=document.getElementsByClassName("tab-content");for(let e=0;e<n.length;e++)n[e].style.display="none";document.getElementById(t).style.display="block"}));
