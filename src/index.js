@@ -1,24 +1,18 @@
-
 console.log('hello')
-let sidebar = document.getElementById('sidebar');
-sidebar.addEventListener('click', changeView);
 
+import Note from './functions/notes'
+import { changeProject } from './functions/view';
 
-function changeView(e) {
+let notesStorage = [];
 
-    let contentType = e.target.textContent;
-    let tab_content = document.getElementsByClassName('tab-content');
+// Goes to different projects section
+changeProject()
 
-    for (let i = 0; i < tab_content.length; i ++){
-
-        tab_content[i].style.display = "none"
-
-    }
-
-    document.getElementById(contentType).style.display = "block";
-
-}
+const note1 = Note('Joey', "It's time to duel!");
+console.log(note1.noteDetails())
 
 
 // Need to find out a way to make sure when the checkbox is clicked that button and
 // the checkbox gets deleted
+
+// Need to learn about local storage
