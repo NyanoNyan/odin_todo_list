@@ -11,16 +11,20 @@ const storeData = () => {
     // taskList must be an array
     const localStorageVal = (projectName, taskList) => {
 
-        let objectStore = {[projectName]:taskList}
-        console.log(objectStore)
-        
-        
-        // !!! How to make a new object for each project !!!!
-       
-        localStorage.setItem('objectStore', JSON.stringify(objectStore))
 
-        let getObj = localStorage.getItem('objecStore');
-        console.log('getObj:', JSON.parse(getObj))
+        localStorage.setItem(taskList, projectName);
+
+        // let objectStore = {[projectName]:taskList}
+        // console.log(objectStore)
+        
+        
+        // // !!! How to make a new object for each project !!!!
+       
+        // localStorage.setItem('objectStore', JSON.stringify(objectStore))
+
+        // let getObj = localStorage.getItem('objecStore');
+        // console.log(getObj)
+        // console.log('getObj:', JSON.parse(getObj))
 
         // let testObject = {'Today':['Today', 'Project One']};
         // localStorage.setItem('testObject', JSON.stringify(testObject));
