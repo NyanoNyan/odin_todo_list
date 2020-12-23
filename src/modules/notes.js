@@ -25,11 +25,23 @@ const Note = (projectName, title, description= '') => {
     }
 
     const noteDetails = () => {
-        console.log(` The Title is: ${getTitle()} \n The description is: ${getDescription()}`)
+        console.log(` The Title is: ${getTitle()} \n The project name is: ${getProjectName()}`)
     };
 
+    const setupData = () => {
+        let dataHold = {
+            projectName: getProjectName(),
+            taskTitle: getTitle(),
+            description: getDescription(),
+            dueDate: '',
+        }
+
+        return dataHold;
+    }
+
     return {changeDescription, 
-        noteDetails}
+        noteDetails,
+        setupData}
 
 }
 
