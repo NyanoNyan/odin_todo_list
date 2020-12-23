@@ -1,5 +1,9 @@
-// import Note from './modules/notes'
+import Note from './notes'
 import { storeData } from './addData'
+
+
+let mainStore = {'Today': [],
+                'Project One': []}
 
 function getTask() {
     
@@ -20,6 +24,16 @@ function getTask() {
             storeObj.taskValue = textText.value;
             clearText('form-input');
             
+            
+            if (storeObj.taskValue != "") {
+                // console.log(storeObj)
+    
+                gatherTasks(mainStore, storeObj);
+                console.log(mainStore['Today']); // Testing
+    
+                storeDataTest.localStorageVal(storeObj.projectName, mainStore['Today']);
+    
+            }
            }
         // Testing
         // console.log(storeObj.taskValue!="");
@@ -30,12 +44,7 @@ function getTask() {
         // putting them in the local storage. !!!
 
         // checking if the input is not blank, if it's not blank then send the data.
-        if (storeObj.taskValue != "") {
-            // console.log(storeObj)
-            
-            storeDataTest.localStorageVal(storeObj.projectName, storeObj.taskValue);
 
-        }
     }
 
 
@@ -48,7 +57,18 @@ function clearText (id) {
     document.getElementById(id).value = "";
 }
 
+// Gather tasks from object and put them in list to prepare it for the local storage
+function gatherTasks(mainStore, storeObj) {
 
+    // loop over main storage which has projects and tasks listed in them
+    for (const key in mainStore) {
+        if (storeObj.projectName == key) {
+            mainStore[key].push(storeObj.taskValue);
+            
+        }
+    }
+
+}
 
 
 export {
