@@ -9,11 +9,26 @@ const storeData = () => {
     
 
     // taskList must be an array
-    const localStorageVal = (projectName, taskList) => {
+    const StorageVal = (taskName, noteObj) => {
 
 
-        localStorage.setItem(taskList, projectName);
+        // !! New thing how to put note class object in local storage for use
 
+        // What about storing objects here now from Note class
+        // Give a random note number each time for a new item or a unique id, no
+        // duplicates
+        
+        let test = {name:"test", time:"Date 2017-02-03T08:38:04.449Z"};
+        // atm need to figure out how to use string for the key name for local storage
+        localStorage.setItem(taskName, JSON.stringify(noteObj));
+        
+
+        console.log(localStorage)
+
+        let my_object = JSON.parse(localStorage.getItem(taskName));
+        console.log(my_object)
+
+        localStorage.clear()
         // let objectStore = {[projectName]:taskList}
         // console.log(objectStore)
         
@@ -36,7 +51,7 @@ const storeData = () => {
     }
 
 
-    return {localStorageVal}
+    return {StorageVal}
 
 };
 
