@@ -10,11 +10,13 @@ let dataList = {
 }
 
 // How to add objects in a object. This to store the task data.
+// https://stackoverflow.com/questions/617036/appending-to-an-object
 
 
 
-const Note = (title, description= '') => {
+const Note = (projectName, title, description= '') => {
 
+    const getProjectName = () => projectName;
     const getTitle = () => title;
     const getDescription = () => description;
 

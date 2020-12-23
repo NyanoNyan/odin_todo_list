@@ -1,22 +1,19 @@
 console.log('hello')
 
-import Note from './modules/notes'
 import { changeProject } from './modules/view';
-import { addTask } from './modules/addData'
+import { getTask } from './modules/getData'
+import { storeData } from './modules/addData'
 
-let dataStore = [];
+let dataStore ;
 let notesStorage = [];
 
 // Goes to different projects section
 changeProject()
 
-const note1 = Note('Joey', "It's time to duel!");
-console.log(note1.noteDetails())
+getTask()
 
-addTask()
-
-
-
+// dataStore = storeData()
+// dataStore.localStorageVal()
 
 
 // Need to find out a way to make sure when the checkbox is clicked that button and
