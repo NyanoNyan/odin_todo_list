@@ -2,8 +2,7 @@ import Note from './notes'
 import { storeData } from './addData'
 
 
-let mainStore = {'Today': [],
-                'Project One': []}
+
 
 function getTask() {
     
@@ -27,11 +26,9 @@ function getTask() {
             
             if (storeObj.taskValue != "") {
                 // console.log(storeObj)
-    
-                gatherTasks(mainStore, storeObj);
-                console.log(mainStore['Today']); // Testing
-    
-                storeDataTest.localStorageVal(storeObj.projectName, mainStore['Today']);
+
+                let note = Note(storeObj.projectName, storeObj.taskValue);
+                storeDataTest.StorageVal(storeObj.taskValue, note.setupData());
     
             }
            }
@@ -57,18 +54,7 @@ function clearText (id) {
     document.getElementById(id).value = "";
 }
 
-// Gather tasks from object and put them in list to prepare it for the local storage
-function gatherTasks(mainStore, storeObj) {
 
-    // loop over main storage which has projects and tasks listed in them
-    for (const key in mainStore) {
-        if (storeObj.projectName == key) {
-            mainStore[key].push(storeObj.taskValue);
-            
-        }
-    }
-
-}
 
 
 export {
@@ -83,3 +69,21 @@ export {
 //      alert('hello')
 //     }
 //   });
+
+
+// // Gather tasks from object and put them in list to prepare it for the local storage
+// function gatherTasks(mainStore, storeObj) {
+
+//     // loop over main storage which has projects and tasks listed in them
+//     for (const key in mainStore) {
+//         if (storeObj.projectName == key) {
+//             mainStore[key].push(storeObj.taskValue);
+            
+//         }
+//     }
+
+// }
+
+
+// let mainStore = {'Today': [],
+//                 'Project One': []}
