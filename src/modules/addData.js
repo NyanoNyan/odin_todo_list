@@ -1,65 +1,101 @@
 
-let notesMainStore = {}
-
-// console.log(getTask())
-
 const storeData = () => {
 
-    // const setupNote = ()
     
-
     // taskList must be an array
     const StorageVal = (taskName, noteObj) => {
 
+        // !!! checker of duplicate
+        // add unique id to each task item
+        repeatChecker()
 
-        // !! New thing how to put note class object in local storage for use
+        localStorage[taskName] = JSON.stringify(noteObj);
+        // localStorage.setItem(taskName, JSON.stringify(noteObj));
+        // console.log(localStorage)
 
-        // What about storing objects here now from Note class
-        // Give a random note number each time for a new item or a unique id, no
-        // duplicates
-        
-        let test = {name:"test", time:"Date 2017-02-03T08:38:04.449Z"};
-        // atm need to figure out how to use string for the key name for local storage
-        localStorage.setItem(taskName, JSON.stringify(noteObj));
-        
-
-        console.log(localStorage)
 
         let my_object = JSON.parse(localStorage.getItem(taskName));
         console.log(my_object)
-
-        localStorage.clear()
-        // let objectStore = {[projectName]:taskList}
-        // console.log(objectStore)
-        
-        
-        // // !!! How to make a new object for each project !!!!
-       
-        // localStorage.setItem('objectStore', JSON.stringify(objectStore))
-
-        // let getObj = localStorage.getItem('objecStore');
-        // console.log(getObj)
-        // console.log('getObj:', JSON.parse(getObj))
-
-        // let testObject = {'Today':['Today', 'Project One']};
-        // localStorage.setItem('testObject', JSON.stringify(testObject));
-
-        // // get the storage back
-        // let retreivedObject = localStorage.getItem('testObject');
-        // console.log('retreivedObject:', JSON.parse(retreivedObject))
+        // localStorage.clear()
 
     }
+ 
+    const repeatChecker = () => {
+    
+        let tasks = document.querySelectorAll('.task-name');
+    
+        for (let i=0; i<tasks.length; i++){
+            console.log(tasks[i].textContent)
+        }
+    
+    }
 
-
-    return {StorageVal}
+    return {StorageVal,
+            repeatChecker}
 
 };
 
 // !!! Get the data from local storage and add them using DOM
 
+const addDOM = () => {
+
+    const getData = () => {
+
+        for (let i=0; i<localStorage.length; i++) {
+            let value = JSON.parse(localStorage.getItem( localStorage.key(i)));
+            checkExists(value.taskTitle);
+        }
+
+    }
+
+    const addHtml = (valueTask) => {
+
+        let task_content = document.getElementById('add-tasks');
+
+        let li = document.createElement('li');
+        let input = document.createElement('input');
+        let button = document.createElement('button');
+
+        input.type = 'checkbox';
+        button.className = 'task-name';
+        button.textContent = valueTask;
+
+        li.appendChild(input);
+        li.appendChild(button);
+
+        task_content.appendChild(li);
+
+    }
+
+    const checkExists =(taskTitle) => {
+
+        let domTasks = document.querySelectorAll('.task-name');
+        let arrayTasks = [];
+
+        // Get all the tasks name and put it in an array
+        for (let i=0; i<domTasks.length; i++) {
+            arrayTasks.push(domTasks[i].textContent);
+        }
+
+        // Let's check this with the taskTitle we want to put in from local storage
+
+        if (arrayTasks.includes(taskTitle)==false) {
+            addHtml(taskTitle)
+        }
+
+
+
+
+    }
+
+    return {getData}
+
+}
+
 
 export {
-    storeData
+    storeData, 
+    addDOM
 } 
 
 // One for adding a Note object in an object.
