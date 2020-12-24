@@ -12,6 +12,7 @@ function getTask() {
     let storeObj = {taskValue : '', projectName: parentElement}
 
     let storeDataTest = storeData();
+    let test = addDOM();
 
     textText.addEventListener('keypress', gatherData);
     
@@ -30,7 +31,7 @@ function getTask() {
                 let note = Note(storeObj.projectName, storeObj.taskValue);
                 storeDataTest.StorageVal(storeObj.taskValue, note.setupData());
 
-                let test = addDOM();
+                
                 test.getData()
     
             }
