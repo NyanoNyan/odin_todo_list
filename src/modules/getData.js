@@ -1,5 +1,5 @@
 import Note from './notes'
-import { storeData } from './addData'
+import { storeData, addDOM } from './addData'
 
 
 
@@ -29,6 +29,9 @@ function getTask() {
 
                 let note = Note(storeObj.projectName, storeObj.taskValue);
                 storeDataTest.StorageVal(storeObj.taskValue, note.setupData());
+
+                let test = addDOM();
+                test.getData()
     
             }
            }
