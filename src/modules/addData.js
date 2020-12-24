@@ -15,7 +15,7 @@ const storeData = () => {
 
 
         let my_object = JSON.parse(localStorage.getItem(taskName));
-        console.log(my_object)
+        // console.log(my_object)
         // localStorage.clear()
 
     }
@@ -43,6 +43,7 @@ const addDOM = () => {
 
         for (let i=0; i<localStorage.length; i++) {
             let value = JSON.parse(localStorage.getItem( localStorage.key(i)));
+            console.log(`The task title is: ${value.taskTitle}`)
             checkExists(value.taskTitle);
         }
 
