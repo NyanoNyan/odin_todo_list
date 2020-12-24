@@ -55,7 +55,7 @@ const storeData = () => {
 
 };
 
-
+// !!! Get the data from local storage and add them using DOM
 
 
 export {
