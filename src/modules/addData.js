@@ -43,7 +43,7 @@ const addDOM = () => {
 
         for (let i=0; i<localStorage.length; i++) {
             let value = JSON.parse(localStorage.getItem( localStorage.key(i)));
-            console.log(`The task title is: ${value.taskTitle}`)
+            // console.log(`The task title is: ${value.taskTitle}`)
             checkExists(value.taskTitle);
         }
 
@@ -58,9 +58,14 @@ const addDOM = () => {
         let button = document.createElement('button');
         let deleteButton = document.createElement('button');
 
+        li.id = valueTask;
+
         input.type = 'checkbox';
+        input.className = 'checkbox-item';
+
         button.className = 'task-name';
         button.textContent = valueTask;
+
         deleteButton.classList = 'delete-button';
         deleteButton.textContent = 'X'
 
