@@ -1,18 +1,25 @@
-console.log('hello')
-
 import { changeProject } from './modules/view';
-import { getTask } from './modules/getData'
-import { storeData,addDOM } from './modules/addData'
+import { getTask } from './modules/getData';
+import { storeData,addDOM } from './modules/addData';
+import {deleteItems} from './modules/complete_and_delete';
 
 let dataStore ;
 let notesStorage = [];
-let test = addDOM();
+let repopulateData = addDOM();
+let deleteAction = deleteItems();
 // Goes to different projects section
-changeProject()
+changeProject();
 
-test.getData()
+// Repopulates the data from local storage when user refreshes.
+repopulateData.getData();
 
-getTask()
+// Gets the data from form submition
+getTask();
+
+
+// delete items
+deleteAction.delTasks();
+
 
 // !!! Need to initialize and put the data which are stored in the local storage when
 // the page loads.
