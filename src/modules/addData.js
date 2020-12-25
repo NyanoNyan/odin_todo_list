@@ -56,13 +56,17 @@ const addDOM = () => {
         let li = document.createElement('li');
         let input = document.createElement('input');
         let button = document.createElement('button');
+        let deleteButton = document.createElement('button');
 
         input.type = 'checkbox';
         button.className = 'task-name';
         button.textContent = valueTask;
+        deleteButton.classList = 'delete-button';
+        deleteButton.textContent = 'X'
 
         li.appendChild(input);
         li.appendChild(button);
+        li.appendChild(deleteButton);
 
         task_content.appendChild(li);
 
