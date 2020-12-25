@@ -1,12 +1,13 @@
 import { changeProject } from './modules/view';
 import { getTask } from './modules/getData';
 import { storeData,addDOM } from './modules/addData';
-import {deleteItems} from './modules/complete_and_delete';
+import {deleteItems, completedTasks} from './modules/complete_and_delete';
 
 let dataStore ;
 let notesStorage = [];
 let repopulateData = addDOM();
 let deleteAction = deleteItems();
+let checkboxComplete = completedTasks();
 // Goes to different projects section
 changeProject();
 
@@ -15,6 +16,9 @@ repopulateData.getData();
 
 // Gets the data from form submition
 getTask();
+
+// markout the completed tasks
+checkboxComplete.markDone();
 
 
 // delete items
@@ -35,3 +39,6 @@ deleteAction.delTasks();
 // the checkbox gets deleted
 
 // Need to learn about local storage
+
+
+// !!! Need to make this work for the second proejct section
