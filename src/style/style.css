@@ -50,7 +50,7 @@
     flex-direction: column;
     position: absolute;
     left: 190px;
-    top: 90px;
+    top: 80px;
     font-size:12px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode';
 
@@ -58,8 +58,6 @@
     background-color: #f1f1f1;
     height: 80%; /* Full height */
     border: 2px black groove;
-    
-
     
 }
 
@@ -94,5 +92,15 @@
     /* border: 1px black groove; */
     overflow: auto; /* Enable scrolling if the sidenav has too much content */
 }
+
+.delete-button{
+    border: none;
+    color:red;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
 
 /* !!! overflow with each list
