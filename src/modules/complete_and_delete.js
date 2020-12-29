@@ -7,23 +7,24 @@ const deleteItems = () => {
     // Need to delete the value from the local storage
     const delTasks = () => {
 
-        // get the takss list, ul list
-        let ul_add_tasks = document.getElementById('add-tasks');
+        
 
-
-        let taskContentDiv = document.querySelector('.task-content2');
+        let taskContentDiv = document.querySelector('#task-content');
         taskContentDiv.addEventListener('click', deleteTask);
 
 
         function deleteTask(e) {
 
+            let div = e.target.parentNode;
+            // get the takss list, ul list
+            let mainNode = div.parentNode;
+
             if(e.target.classList.contains('delete-button')) {
 
                 if(confirm('Are you sure the Krabby Patty formula will be deleted, aka the task.')) {
-                    let div = e.target.parentNode;
-                    ul_add_tasks.removeChild(div);
 
-                    console.log(div.id);
+                    mainNode.removeChild(div);
+                    // console.log(div.id);
 
                     delStorageLocal(div.id);
 
@@ -55,7 +56,10 @@ const completedTasks = () => {
 
     const markDone = () => {
 
-        let taskContentDiv = document.querySelector('.task-content2');
+        let taskContentDiv = document.getElementById('task-content');
+        // let taskContentDiv = document.querySelector('.task-content2');
+
+
         taskContentDiv.addEventListener('click', strikethrough);
 
         function strikethrough(e) {
