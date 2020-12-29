@@ -14,6 +14,7 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    border: 1px black groove;
     width: 15%;
     background-color: #f1f1f1;
     height: 80%; /* Full height */
@@ -49,7 +50,7 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    left: 190px;
+    left: 200px;
     top: 80px;
     font-size:12px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode';
@@ -82,7 +83,7 @@
     flex-direction: column;
     position: absolute;
     left: 0px;
-    top: 68px;
+    top: 80px;
     font-size:12px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode';
 
@@ -94,8 +95,9 @@
 }
 
 .delete-button{
+    background-color: #f1f1f1;
+    color: red;
     border: none;
-    color:red;
 }
 
 .line-through {
