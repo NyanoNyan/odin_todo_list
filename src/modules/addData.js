@@ -1,4 +1,5 @@
 
+
 const storeData = () => {
 
     
@@ -37,6 +38,9 @@ const storeData = () => {
 
 // !!! Get the data from local storage and add them using DOM
 
+// !!! Need to figure out how to add the tasks when it's loaded again
+// but in different project path.
+
 const addDOM = () => {
 
     const getData = () => {
@@ -44,14 +48,42 @@ const addDOM = () => {
         for (let i=0; i<localStorage.length; i++) {
             let value = JSON.parse(localStorage.getItem( localStorage.key(i)));
             // console.log(`The task title is: ${value.taskTitle}`)
-            checkExists(value.taskTitle);
+            // console.log(`The project title is: ${value.projectName}`)
+            checkExists(value.taskTitle, value.projectName);
         }
 
     }
 
-    const addHtml = (valueTask) => {
+    const addHtml = (valueTask, projectNameN='') => {
 
-        let task_content = document.getElementById('add-tasks');
+        let currentProj = '';
+
+        if (projectNameN == ''){
+
+            // Get the current project name that is selected
+            currentProj = document.querySelector('.unique-current-project').id;
+            // console.log(currentProj)
+
+        } else if (projectNameN != '') {
+
+            currentProj = projectNameN;
+
+        }
+
+        // Get the element of the project name which has all the lists in the childnodes
+        let gatherProj = document.getElementById(currentProj);
+
+        let taskContent2Ele = checkerDomElement('task-content2', gatherProj.childNodes, 'class');
+        // console.log(taskContent2Ele)
+        
+        // new way of getting the task list of each project
+        let task_content = checkerDomElement('add-tasks', taskContent2Ele.childNodes, 'id');
+        // Is there a better way to do this?
+
+        // old way
+        // let task_content = document.getElementById('add-tasks');
+
+
 
         let li = document.createElement('li');
         let input = document.createElement('input');
@@ -77,7 +109,7 @@ const addDOM = () => {
 
     }
 
-    const checkExists =(taskTitle) => {
+    const checkExists =(taskTitle, projectName) => {
 
         let domTasks = document.querySelectorAll('.task-name');
         let arrayTasks = [];
@@ -90,7 +122,7 @@ const addDOM = () => {
         // Let's check this with the taskTitle we want to put in from local storage
 
         if (arrayTasks.includes(taskTitle)==false) {
-            addHtml(taskTitle)
+            addHtml(taskTitle, projectName)
         }
 
 
@@ -99,6 +131,26 @@ const addDOM = () => {
     }
 
     return {getData}
+
+}
+
+function checkerDomElement(look_value, dom_collection, class_or_id) {
+
+    for (let i=0; i<dom_collection.length; i++) {
+
+        if (class_or_id == 'id') {
+
+            if (dom_collection[i].id == look_value){
+                return dom_collection[i];
+            }
+        } else if (class_or_id == 'class') {
+            // console.log(dom_collection[i])
+            if (dom_collection[i].classList == look_value) {
+                return dom_collection[i];
+            }
+        }
+        
+    }
 
 }
 
