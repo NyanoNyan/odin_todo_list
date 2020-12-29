@@ -1,15 +1,16 @@
-import { changeProject } from './modules/view';
+import { viewChanger } from './modules/view';
 import { getTask } from './modules/getData';
 import { storeData,addDOM } from './modules/addData';
 import {deleteItems, completedTasks} from './modules/complete_and_delete';
 
 let dataStore ;
 let notesStorage = [];
+let mainView = viewChanger();
 let repopulateData = addDOM();
 let deleteAction = deleteItems();
 let checkboxComplete = completedTasks();
 // Goes to different projects section
-changeProject();
+mainView.changeProject()
 
 // Repopulates the data from local storage when user refreshes.
 repopulateData.getData();
