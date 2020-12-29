@@ -7,9 +7,7 @@ import { storeData, addDOM } from './addData'
 function getTask() {
     
     let textText = document.getElementById('form-input');
-    // This is the project name variable
-    let parentElement = textText.parentElement.parentElement.id;
-    let storeObj = {taskValue : '', projectName: parentElement}
+
 
     let storeDataTest = storeData();
     let test = addDOM();
@@ -18,6 +16,14 @@ function getTask() {
     
 
     function gatherData(e) {
+
+        // This is the project name variable
+        let currentProj = document.querySelector('.unique-current-project');
+        let parentElement = currentProj.id;
+        // old code
+        // let parentElement = textText.parentElement.parentElement.id;
+        let storeObj = {taskValue : '', projectName: parentElement}
+
         if (e.code === 'Enter') {
             e.preventDefault();
             
@@ -26,9 +32,10 @@ function getTask() {
             
             
             if (storeObj.taskValue != "") {
-                // console.log(storeObj)
+                // console.log(storeObj.projectName)
 
                 let note = Note(storeObj.projectName, storeObj.taskValue);
+                // console.log(`The note obj is ${note.noteDetails()}`)
                 storeDataTest.StorageVal(storeObj.taskValue, note.setupData());
 
                 
