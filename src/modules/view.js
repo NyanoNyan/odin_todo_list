@@ -8,7 +8,7 @@ const viewChanger = () => {
 
         let currentProj = document.querySelector('.unique-current-project');
         
-        let sidebar = document.getElementById('sidebar');
+        let sidebar = document.getElementById('sidebar-tasks');
         sidebar.addEventListener('click', changeView);
     
         function changeView(e) {
