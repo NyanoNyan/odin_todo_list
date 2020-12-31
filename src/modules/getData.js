@@ -1,7 +1,5 @@
 import Note from './notes'
-import { storeData, addDOM } from './addData'
-
-
+import { storeData, addDOM, projectMaker } from './addData'
 
 
 function getTask() {
@@ -59,17 +57,55 @@ function getTask() {
 
 }
 
+
+function getProjects() {
+
+    let projectCreate = projectMaker();
+    let projectLocalStorage = storeData();
+
+    let formProject = document.getElementById('project-form');
+    formProject.addEventListener('keypress', passData);
+
+
+    function passData(e) {
+
+        if (e.code === 'Enter') {
+            e.preventDefault();
+
+            // listOfProjects.push(e.target.value);
+            // Stores project in local storage has name !projectNames!
+            projectLocalStorage.storeProjects(e.target.value)
+            
+            // Creates project list and everything in it such as tasks and layout of all the html
+            projectCreate.addProject(e.target.value);
+
+            clearText('form-input-project');
+
+        }
+
+
+    }
+
+}
+
+
+
 // Delete input from using DOM, aka used for 
 // deleting a task when the enter has been pressed
 function clearText (id) {
     document.getElementById(id).value = "";
 }
 
+const loadProjects = () => {
 
+    return JSON.parse(localStorage.getItem('!projectNames!'));
+
+}
 
 
 export {
-    getTask
+    getTask,
+    getProjects
 } 
 
 
