@@ -1,3 +1,6 @@
+import {differenceInDays} from 'date-fns'
+
+
 const storeData = () => {
 
     
@@ -70,6 +73,25 @@ const storeData = () => {
 
     }
 
+    const storeDateInfo = (dueDate, taskName) => {
+
+        // Issues with pre built tasks as they don't have data stored in them 
+        // such as due date. So won't work when submittng it's due date.
+
+        console.log('I am in store Date info');
+        console.log(taskName)
+        let getTask = JSON.parse(localStorage.getItem(taskName));
+        console.log(getTask);
+
+        getTask.dueDate = dueDate;
+        console.log(dueDate)
+        localStorage.setItem(taskName, JSON.stringify(getTask));
+
+
+
+
+    }
+
 
 
 
@@ -92,7 +114,8 @@ const storeData = () => {
 
     return {StorageVal,
             repeatChecker,
-            storeProjects}
+            storeProjects,
+            storeDateInfo}
 
 };
 
@@ -150,17 +173,22 @@ const addDOM = () => {
         
         // new way of getting the task list of each project
         let task_content = checkerDomElement('add-tasks', taskContent2Ele.childNodes, 'id');
+        // console.log('Task_content is ');
+        // console.log(task_content)
         // Is there a better way to do this?
 
         // old way
         // let task_content = document.getElementById('add-tasks');
-
+        let modalValues = setUpModal();
 
 
         let li = document.createElement('li');
         let input = document.createElement('input');
         let button = document.createElement('button');
         let deleteButton = document.createElement('button');
+        
+        // let form = document.createElement('form');
+        // let input2 = document.createElement('input');
 
         li.id = valueTask;
 
@@ -170,14 +198,67 @@ const addDOM = () => {
         button.className = 'task-name';
         button.textContent = valueTask;
 
+        // form.className = "date-form";
+        // form.style.display = "none";
+        // input2.type = "date";
+        // input2.class = "date-data";
+        // input.name = "due-date";
+
         deleteButton.classList = 'delete-button';
         deleteButton.textContent = 'X'
 
         li.appendChild(input);
         li.appendChild(button);
         li.appendChild(deleteButton);
+        li.appendChild(modalValues);
+        
+
+        // form.appendChild(input2);
+        // li.appendChild(form);
 
         task_content.appendChild(li);
+
+
+    }
+
+    const setUpModal = () => {
+
+        let div1 = document.createElement('div');
+        let div2 = document.createElement('div');
+        let span = document.createElement('span');
+
+        let form = document.createElement('form');
+        let p = document.createElement('p');
+        let input1 = document.createElement('input');
+        let input2 = document.createElement('input');
+
+        div1.id = "myModal";
+        div1.className = "modal";
+
+        div2.className = "modal-content";
+        span.className = "close-modal";
+        span.innerHTML = '&times;'
+        
+        form.className = "date-form";
+        p.textContent = "Set Due Date";
+        input1.type = "date";
+        input1.id = "date-date";
+        input1.className = "date-data";
+        input1.name = "due-date";
+        input2.type = "submit";
+        input2.value = "Submit";
+
+        form.appendChild(p);
+        form.appendChild(input1);
+        form.appendChild(input2);
+
+        div2.appendChild(span);
+        div2.appendChild(form);
+        div1.appendChild(div2);
+
+        return div1
+
+
 
     }
 
@@ -207,13 +288,17 @@ const addDOM = () => {
 
     }
 
-    return {getData}
+    return {getData,
+        setUpModal}
 
 }
 
 
 const projectMaker = () => {
 
+    let addDOM_modal = addDOM()
+
+    
     const addProject = (projectName) => {
 
         let mainTop = document.getElementById('task-content');
@@ -230,6 +315,8 @@ const projectMaker = () => {
         let button1 = document.createElement('button');
         let button2 = document.createElement('button');
 
+        let modal_values = addDOM_modal.setUpModal()
+
         div1.id = projectName;
         div1.className = 'tab-content';
         div1.style = 'display: none';
@@ -245,10 +332,12 @@ const projectMaker = () => {
         button1.textContent = "Example task";
         button2.className = "delete-button";
         button2.textContent = "X";
+        sidebarButton.className = "proj-name";
 
         li.appendChild(input);
         li.appendChild(button1);
         li.appendChild(button2);
+        li.appendChild(modal_values);
 
         ul.appendChild(li);
 
@@ -292,6 +381,90 @@ const projectMaker = () => {
 
 }
 
+
+const addDate = () => {
+
+
+    const setDate = () => {
+
+        let task_names = document.querySelectorAll('#add-tasks');
+        
+        Array.from(task_names).forEach(function (task_name) {
+            task_name.addEventListener('click', datePopup);
+        });
+    
+
+        function datePopup(e) {
+
+            // console.log(e.target.parentNode.childNodes);
+            
+            // Checking if the button clicked is the task button only
+            if (e.target.nodeName === "BUTTON" && e.target.className == "task-name") {
+                // console.log(e.target.className)
+                // let date_form = e.target.nextElementSibling.nextElementSibling;
+
+                // Get unique modal box depending on the button clicked on different project.
+                // Make a Modal Box
+                // Get the modal
+                // let modal = document.getElementById("myModal");
+                let modal = checkerDomElement('myModal',e.target.parentNode.childNodes, 'id');
+      
+                let modalContent = checkerDomElement('modal-content', modal.childNodes, 'class');
+                // console.log(modalContent.childNodes);
+
+                // Get the <span> element that closes the modal
+                // let span = document.querySelector('.close-modal');
+                let span = checkerDomElement('close-modal',modalContent.childNodes, 'class');
+
+                // When the user clicks on the button, open the modal
+                modal.style.display = "block";
+
+                // When the user clicks on <span> (x), close the modal
+                
+                span.onclick = function(e) {
+                    // Using this because of event bubbling
+                    e.stopPropagation();
+                    // console.log(modal.style.display)
+                    modal.style.display = "none";
+
+                    // console.log(modal.style.display)
+
+
+                }
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                } 
+
+            }
+
+
+
+
+        }
+
+    }
+
+    const domDiffDate = (dueDate, currentDate) => {
+
+        console.log(differenceInDays(dueDate, currentDate));
+
+
+
+    }
+
+    return {
+        setDate,
+        domDiffDate
+    }
+
+}
+
+
+
+
 function checkerDomElement(look_value, dom_collection, class_or_id) {
 
     for (let i=0; i<dom_collection.length; i++) {
@@ -317,7 +490,9 @@ function checkerDomElement(look_value, dom_collection, class_or_id) {
 export {
     storeData, 
     addDOM,
-    projectMaker
+    projectMaker,
+    addDate,
+    checkerDomElement
 } 
 
 // One for adding a Note object in an object.
