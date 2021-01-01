@@ -14,8 +14,10 @@
             <h1>To Do Tasks</h1>
         </div>
 
-
+        
         <div class="two-content">
+            <!-- <div class="vl2"></div> -->
+           
 
             <div id="sidebar" class="grid-item">
 
@@ -27,8 +29,13 @@
                             </form>
                         
                         <div id="sidebar-tasks">
-                            <li ><button class="proj-name">Today</button></li>
-                            <li ><button class="proj-name">Project One</button></li>
+                            <li >
+                                <button class="proj-name">Today</button>
+                            </li>
+
+                            <li >
+                                <button class="proj-name">Project One</button>
+                            </li>
                         </div>    
 
 
@@ -49,19 +56,45 @@
                         <div class="task-content2">
                             <ul id="add-tasks">           
                                 <li id="Testing Task">
+
                                     <input class="checkbox-item" type="checkbox">
                                     <button class="task-name">Testing Task</button>
                                     <button class="delete-button">X</button>
 
+                                    
+                                    <div id="myModal" class="modal">
+
+                                        <!-- Modal content -->
+                                        <div class="modal-content">
+                                            <span class="close-modal">&times;</span>
+        
+                                            <form class="date-form">
+                                                <p>Set Due Date</p>
+                                                <input type="date" id="date-date" class="date-data" name="due-date">
+                                                <input type="submit" value="Submit">
+                                            </form>
+        
+                                        </div>
+                                    
+                                    </div>    
+
+                            
                                 </li>
+
+                                <!-- Need to add the bottom form in add dom to all the tasks -->
+
 
                                 <!-- <li id="Project One">
                                     <input class="checkbox-item" type="checkbox">
                                     <button class="task-name">Project One</button>
                                     <button class="delete-button">X</button>
                                 </li> -->
+
                                 
-                        </ul>
+                            </ul>
+                            
+
+                        
                         </div>
                      </div>
 
@@ -73,6 +106,23 @@
                                     <input class="checkbox-item" type="checkbox">
                                     <button class="task-name">Testing Task 2</button>
                                     <button class="delete-button">X</button>
+
+                                                                        
+                                    <div id="myModal" class="modal">
+
+                                        <!-- Modal content -->
+                                        <div class="modal-content">
+                                            <span class="close-modal">&times;</span>
+        
+                                            <form class="date-form">
+                                                <p>Set Due Date</p>
+                                                <input type="date" id="date-date" class="date-data" name="due-date">
+                                                <input type="submit" value="Submit">
+                                            </form>
+        
+                                        </div>
+                                    
+                                    </div>    
 
                                 </li>
                                 
