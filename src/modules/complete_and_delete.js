@@ -20,7 +20,7 @@ const deleteItems = () => {
             let mainNode = div.parentNode;
 
             if(e.target.classList.contains('delete-button')) {
-
+                
                 if(confirm('Are you sure the Krabby Patty formula will be deleted, aka the task.')) {
 
                     mainNode.removeChild(div);
