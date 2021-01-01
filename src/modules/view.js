@@ -12,24 +12,31 @@ const viewChanger = () => {
         sidebar.addEventListener('click', changeView);
     
         function changeView(e) {
-    
-            let contentType = e.target.textContent;
-            let tab_content = document.getElementsByClassName('tab-content');
 
-            for (let i = 0; i < tab_content.length; i ++){
-    
-                tab_content[i].style.display = "none";
-    
+            // console.log(e.target)
+            if (e.target.nodeName === "BUTTON" && e.target.className == "proj-name") {
+          
+               
+        
+                let contentType = e.target.textContent;
+                let tab_content = document.getElementsByClassName('tab-content');
+
+                for (let i = 0; i < tab_content.length; i ++){
+        
+                    tab_content[i].style.display = "none";
+        
+                }
+                // console.log(contentType)
+                // projectName = contentType;
+                
+                document.getElementById(contentType).style.display = "block";
+                currentProj.id = contentType;
+
+                // Change title
+                let title = document.querySelector('.h4-content');
+                title.textContent = `${contentType} Tasks`
+
             }
-            // console.log(contentType)
-            // projectName = contentType;
-            
-            document.getElementById(contentType).style.display = "block";
-            currentProj.id = contentType;
-
-            // Change title
-            let title = document.querySelector('.h4-content');
-            title.textContent = `${contentType} Tasks`
 
         }
     }
