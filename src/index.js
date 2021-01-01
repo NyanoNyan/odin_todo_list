@@ -1,6 +1,6 @@
 import { viewChanger } from './modules/view';
-import { getTask, getProjects } from './modules/getData';
-import { storeData,addDOM, projectMaker } from './modules/addData';
+import { getTask, getProjects, getDate } from './modules/getData';
+import { storeData,addDOM, projectMaker, addDate } from './modules/addData';
 import {deleteItems, completedTasks} from './modules/complete_and_delete';
 
 let dataStore ;
@@ -10,6 +10,8 @@ let mainView = viewChanger();
 let loadDefaultProjects = storeData();
 let repopulateData = addDOM();
 let repopulateProjects = projectMaker();
+
+let addDate1 = addDate();
 
 let deleteAction = deleteItems();
 let checkboxComplete = completedTasks();
@@ -24,13 +26,20 @@ mainView.changeProject()
 
 // If there is no key for storing project name and if nothing is inside local storage
 // initialize localstorage for project names.
-if (localStorage.length == 0 && localStorage.key(0) != '!projectNames!') {
+if (localStorage.getItem('!projectNames!') === null) {
     localStorage['!projectNames!'] = JSON.stringify([]);
 }
+// !!! Bug here, what if somone already adds in the task first then adds the project
+// It won't register it beign the first key and localStorage will already be filled up.
+// Maybe contains to check if it's in there? 
 
 repopulateProjects.loadAllProjects();
 repopulateData.getData();
 
+addDate1.setDate()
+
+// Testing
+getDate()
 
 // Gets the data from form submition
 getTask();
@@ -63,8 +72,18 @@ deleteAction.delTasks();
 // !!! Need to make this work for the second proejct section
 
 // !!! Add button to add more projects. Would need to make a new html with all of the things inside as
-// previous task-content id values.
+// previous task-content id values. Done
 
 // !!! Also need to add date and time on when it's due and priority 
 
 // !!! How to make two divs not touch
+
+// !!! Hover for the buttons
+
+// !!! Add due date and after remaining days for tasks
+
+
+// !!! Fix why Modal is not working for new project and tasks creation 
+// check addData where you added
+// Double check class and id names
+// Why is it only working for one project?
