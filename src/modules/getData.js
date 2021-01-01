@@ -1,5 +1,6 @@
 import Note from './notes'
-import { storeData, addDOM, projectMaker } from './addData'
+import { storeData, addDOM, projectMaker, checkerDomElement, addDate } from './addData'
+import {compareAsc, format} from 'date-fns'
 
 
 function getTask() {
@@ -80,6 +81,7 @@ function getProjects() {
             projectCreate.addProject(e.target.value);
 
             clearText('form-input-project');
+            
 
         }
 
@@ -96,16 +98,57 @@ function clearText (id) {
     document.getElementById(id).value = "";
 }
 
-const loadProjects = () => {
+function getDate () {
 
-    return JSON.parse(localStorage.getItem('!projectNames!'));
+    let storeData1 = storeData();
+    // Test with diff dates
+    let addDate1 = addDate();
+    let dateForm = document.getElementsByClassName('date-form');
+    let modal = document.getElementById("myModal");
+
+    Array.from(dateForm).forEach(function (dateForm1) {
+        dateForm1.addEventListener('submit', collectDate);
+    });
+
+
+    function collectDate(e) {
+
+        e.preventDefault();
+
+        // Get the specific clicked butons date-date value
+        console.log(e.target.childNodes)
+        let date_date = checkerDomElement('date-date', e.target.childNodes, 'id').value;
+
+        // Need to get the specific date-date value
+
+        // let date_date = document.getElementById('date-date').value;
+        let form_date = new Date(date_date);
+        let currentDate = new Date();
+        
+        // console.log(date_date)
+
+        // Get the task name from the form, using parent nodes and child nodes, lol
+        let domListTasks = e.target.parentNode.parentNode.parentNode.childNodes;
+        let taskName = checkerDomElement('task-name', domListTasks, 'class').textContent;
+
+        // console.log(taskName);
+        storeData1.storeDateInfo(form_date, taskName);
+
+        // Testing Get difference in dates
+        addDate1.domDiffDate(form_date, currentDate);
+
+        // Need to feed this data through addData to add the data in localStorage
+        // Then need to add this data in index.html using DOM
+        // Can also do days remaining.
+    }
 
 }
 
 
 export {
     getTask,
-    getProjects
+    getProjects,
+    getDate
 } 
 
 
