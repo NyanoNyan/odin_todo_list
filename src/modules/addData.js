@@ -1,4 +1,4 @@
-import {differenceInDays} from 'date-fns'
+import {differenceInDays, format} from 'date-fns'
 
 
 const storeData = () => {
@@ -78,13 +78,13 @@ const storeData = () => {
         // Issues with pre built tasks as they don't have data stored in them 
         // such as due date. So won't work when submittng it's due date.
 
-        console.log('I am in store Date info');
-        console.log(taskName)
+        // console.log('I am in store Date info');
+        // console.log(taskName)
         let getTask = JSON.parse(localStorage.getItem(taskName));
-        console.log(getTask);
+        // console.log(getTask);
 
         getTask.dueDate = dueDate;
-        console.log(dueDate)
+        // console.log(dueDate)
         localStorage.setItem(taskName, JSON.stringify(getTask));
 
 
@@ -139,7 +139,7 @@ const addDOM = () => {
                     let value = JSON.parse(localStorage.getItem( localStorage.key(i)));
                     // console.log(`The task title is: ${value.taskTitle}`)
                     // console.log(`The project title is: ${value.projectName}`)
-                    checkExists(value.taskTitle, value.projectName);
+                    checkExists(value.taskTitle, value.projectName, value.dueDate);
 
                 } 
 
@@ -149,9 +149,10 @@ const addDOM = () => {
 
     }
 
-    const addHtml = (valueTask, projectNameN='') => {
+    const addHtml = (valueTask, projectNameN='', diffDate= '', modalInfo) => {
 
         let currentProj = '';
+        let shorterTask = '';
 
         if (projectNameN == ''){
 
@@ -179,24 +180,29 @@ const addDOM = () => {
 
         // old way
         // let task_content = document.getElementById('add-tasks');
-        let modalValues = setUpModal();
+        let modalValues = modalInfo;
 
 
         let li = document.createElement('li');
         let input = document.createElement('input');
         let button = document.createElement('button');
         let deleteButton = document.createElement('button');
+        let dateButton = document.createElement('button');
         
         // let form = document.createElement('form');
         // let input2 = document.createElement('input');
 
+        let shortValueTask = valueTask.substring(0,14);
         li.id = valueTask;
 
         input.type = 'checkbox';
         input.className = 'checkbox-item';
 
         button.className = 'task-name';
-        button.textContent = valueTask;
+        button.textContent = shortValueTask;
+
+        dateButton.className = "days-remaining";
+        dateButton.textContent = diffDate;
 
         // form.className = "date-form";
         // form.style.display = "none";
@@ -209,6 +215,7 @@ const addDOM = () => {
 
         li.appendChild(input);
         li.appendChild(button);
+        li.appendChild(dateButton);
         li.appendChild(deleteButton);
         li.appendChild(modalValues);
         
@@ -221,16 +228,19 @@ const addDOM = () => {
 
     }
 
-    const setUpModal = () => {
+    const setUpModal = (taskTitle, dueDate) => {
 
         let div1 = document.createElement('div');
         let div2 = document.createElement('div');
         let span = document.createElement('span');
 
         let form = document.createElement('form');
-        let p = document.createElement('p');
+        let b = document.createElement('b');
         let input1 = document.createElement('input');
         let input2 = document.createElement('input');
+
+        let p1 = document.createElement('p');
+        let p2 = document.createElement('p');
 
         div1.id = "myModal";
         div1.className = "modal";
@@ -240,7 +250,7 @@ const addDOM = () => {
         span.innerHTML = '&times;'
         
         form.className = "date-form";
-        p.textContent = "Set Due Date";
+        b.textContent = "Set Due Date: ";
         input1.type = "date";
         input1.id = "date-date";
         input1.className = "date-data";
@@ -248,9 +258,14 @@ const addDOM = () => {
         input2.type = "submit";
         input2.value = "Submit";
 
-        form.appendChild(p);
+        p1.textContent = `Task Name: ${taskTitle}`;
+        p2.textContent = `Due Date: ${dueDate}`;
+
+        form.appendChild(b);
         form.appendChild(input1);
         form.appendChild(input2);
+        form.appendChild(p1);
+        form.appendChild(p2);
 
         div2.appendChild(span);
         div2.appendChild(form);
@@ -262,13 +277,26 @@ const addDOM = () => {
 
     }
 
-    const checkExists =(taskTitle, projectName) => {
+    const checkExists =(taskTitle, projectName, dueDate) => {
+
+        let addDate1 = addDate()
+        let addDom1 = addDOM()
 
         let domTasks = document.querySelectorAll('.task-name');
         // let domProjects = document.querySelectorAll('.task-name');
 
         let arrayTasks = [];
         let arrayProjects = []; 
+
+        // Set up date
+        
+        let currentDate = new Date();
+        let diff_date = addDate1.domDiffDate(dueDate, currentDate);
+        let form_date = new Date(dueDate);
+        let formatDate = form_date.toDateString() 
+        // modal set up
+
+        let modalInfo = addDom1.setUpModal(taskTitle, formatDate);
 
         // console.log('here')
         // console.log(arrayProjects);
@@ -282,7 +310,11 @@ const addDOM = () => {
         // Let's check this with the taskTitle we want to put in from local storage
 
         if (arrayTasks.includes(taskTitle)==false) {
-            addHtml(taskTitle, projectName);
+
+            addHtml(taskTitle, projectName, diff_date, modalInfo);
+
+
+            
         }
 
 
@@ -447,13 +479,44 @@ const addDate = () => {
 
     }
 
-    const domDiffDate = (dueDate, currentDate) => {
+    const domDiffDate = (dueDate, currentDate, taskNameNode="") => {
 
-        console.log(differenceInDays(dueDate, currentDate));
+        // If taskNameNode is given
+        if (taskNameNode != "") {
 
-
+            let days_left = differenceInDays(dueDate, currentDate);
+            // console.log(taskNameNode.parentNode.childNodes)
+            let getDateButton = checkerDomElement('days-remaining',taskNameNode.parentNode.childNodes, 'class')
+    
+            // console.log(getDateButton)
+            getDateButton.textContent = 'Days left: ' + days_left + ' days';
+    
+        }
+        // If no taskNameNode is given
+        else {
+            // console.log(dueDate == "")
+            if (dueDate === "") {
+                return 'Days Left: Unassigned'
+                
+            }
+            let currentDate = new Date();
+            let form_date = new Date(dueDate);
+            let diff_date = differenceInDays(form_date, currentDate);
+            let formatDate = `Days Left: ${diff_date} days`;
+    
+            return formatDate
+        }
 
     }
+
+    // // How to load from localstorage the date and the current date and get the difference.
+    // const loadDates = (taskTitle) => {
+
+    //     // let getDomEle = document.getElementById('')
+    //     console.log(taskTitle)
+
+
+    // }
 
     return {
         setDate,
