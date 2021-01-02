@@ -156,16 +156,36 @@ body {
     font-size: 14px;
     color: white;
     /* font-weight: bold; */
-    text-align: center;
+    text-align: left;
     
     position: absolute;
-    right: 33%;
+    right: 35%;
 
 }
 
+.days-remaining{
+    background-color: #f1f1f1;;
+    color: black;
+    border: none;
+    pointer-events: none;
+
+    position: absolute;
+    right: 35%;
+    width: auto;
+
+    background-color: #4CAF50;
+    box-shadow: green 1px 3px 1px;
+    text-shadow: green 1px 3px 1px;
+    font-size: 14px;
+    color: white;
+
+}
+  
+
+
 .checkbox-item {
     margin: 3px 20px;
-    width: 150px;
+    width: 120px;
 }
 
 /* !!! overflow with each list
