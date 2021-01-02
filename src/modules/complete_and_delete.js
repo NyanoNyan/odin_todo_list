@@ -67,16 +67,21 @@ const completedTasks = () => {
             if(e.target.classList.contains('checkbox-item')) {
 
                 let div = e.target.parentNode.childNodes;
+                // console.log(div)
 
                 // console.log(e.target.checked)
 
                 // Condtional to put a strikethrough when it is ticked
                 // and take it off when it is ticked off
                 if (e.target.checked == true) {
-
+                    // for task
                     for (let i=0; i<div.length; i++) {
                         if (div[i].classList == 'task-name'){
                             div[i].classList = "task-name line-through"
+                        }
+                    // for dates
+                        if (div[i].className == 'days-remaining') {
+                            div[i].className = "days-remaining line-through"
                         }
     
                     }
@@ -85,6 +90,10 @@ const completedTasks = () => {
                     for (let i=0; i<div.length; i++) {
                         if (div[i].classList == 'task-name line-through'){
                             div[i].classList = "task-name"
+                        }
+
+                        if (div[i].className == 'days-remaining line-through'){
+                            div[i].className = "days-remaining"
                         }
 
                     }
