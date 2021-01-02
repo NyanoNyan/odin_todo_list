@@ -5,5 +5,5 @@
 Link: https://nyanonyan.github.io/odin_todo_list/
 
 
-### Futher implementations 
+##### Futher implementations 
 Delete buttons on each projects.
