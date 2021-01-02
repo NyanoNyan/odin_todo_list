@@ -1,5 +1,5 @@
 import {differenceInDays, format} from 'date-fns'
-
+import { getDate } from './getData';
 
 const storeData = () => {
 
@@ -225,7 +225,7 @@ const addDOM = () => {
 
         task_content.appendChild(li);
 
-
+        
     }
 
     const setUpModal = (taskTitle, dueDate) => {
@@ -312,8 +312,7 @@ const addDOM = () => {
         if (arrayTasks.includes(taskTitle)==false) {
 
             addHtml(taskTitle, projectName, diff_date, modalInfo);
-
-
+            
             
         }
 
@@ -342,10 +341,6 @@ const projectMaker = () => {
         let div1 = document.createElement('div');
         let div2 = document.createElement('div');
         let ul = document.createElement('ul');
-        let li = document.createElement('li');
-        let input = document.createElement('input');
-        let button1 = document.createElement('button');
-        let button2 = document.createElement('button');
 
         let modal_values = addDOM_modal.setUpModal()
 
@@ -356,22 +351,8 @@ const projectMaker = () => {
         div2.className = 'task-content2';
 
         ul.id = 'add-tasks';
-        li.id = 'Example task';
-        input.className = "checkbox-item";
-        input.type = "checkbox";
 
-        button1.className = "task-name";
-        button1.textContent = "Example task";
-        button2.className = "delete-button";
-        button2.textContent = "X";
         sidebarButton.className = "proj-name";
-
-        li.appendChild(input);
-        li.appendChild(button1);
-        li.appendChild(button2);
-        li.appendChild(modal_values);
-
-        ul.appendChild(li);
 
         div2.appendChild(ul);
         div1.appendChild(div2);
@@ -427,6 +408,7 @@ const addDate = () => {
     
 
         function datePopup(e) {
+            
 
             // console.log(e.target.parentNode.childNodes);
             
@@ -442,6 +424,8 @@ const addDate = () => {
                 let modal = checkerDomElement('myModal',e.target.parentNode.childNodes, 'id');
       
                 let modalContent = checkerDomElement('modal-content', modal.childNodes, 'class');
+
+                getDate(modalContent);
                 // console.log(modalContent.childNodes);
 
                 // Get the <span> element that closes the modal
