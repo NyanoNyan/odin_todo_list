@@ -295,7 +295,7 @@ const addDOM = () => {
         let form_date = new Date(dueDate);
         let formatDate = form_date.toDateString() 
         // modal set up
-
+        // console.log('date' + form_date)
         let modalInfo = addDom1.setUpModal(taskTitle, formatDate);
 
         // console.log('here')
@@ -490,6 +490,19 @@ const addDate = () => {
     
             // console.log(getDateButton)
             getDateButton.textContent = 'Days left: ' + days_left + ' days';
+
+
+            // Put this in modal
+            
+            // console.log(taskNameNode.parentNode.childNodes)
+            let modal_main = checkerDomElement('myModal', taskNameNode.parentNode.childNodes, 'id');
+            let date_form = modal_main.childNodes[0].childNodes[1].childNodes;
+            let formatDate = dueDate.toDateString() 
+
+            // console.log(date_form)
+            date_form[3].textContent = `Task Name: ${taskNameNode.textContent}`;
+            date_form[4].textContent = `Due date: ${formatDate}`; 
+
     
         }
         // If no taskNameNode is given
