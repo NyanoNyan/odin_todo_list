@@ -116,7 +116,7 @@ function getDate () {
         e.preventDefault();
 
         // Get the specific clicked butons date-date value
-        console.log(e.target.childNodes)
+        // console.log(e.target.childNodes)
         let date_date = checkerDomElement('date-date', e.target.childNodes, 'id').value;
 
         // Need to get the specific date-date value
@@ -130,12 +130,13 @@ function getDate () {
         // Get the task name from the form, using parent nodes and child nodes, lol
         let domListTasks = e.target.parentNode.parentNode.parentNode.childNodes;
         let taskName = checkerDomElement('task-name', domListTasks, 'class').textContent;
+        let taskNameNode = checkerDomElement('task-name', domListTasks, 'class');
 
-        // console.log(taskName);
+        // console.log(taskNameNode);
         storeData1.storeDateInfo(form_date, taskName);
 
         // Testing Get difference in dates
-        addDate1.domDiffDate(form_date, currentDate);
+        addDate1.domDiffDate(form_date, currentDate, taskNameNode);
 
         // Need to feed this data through addData to add the data in localStorage
         // Then need to add this data in index.html using DOM
