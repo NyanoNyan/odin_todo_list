@@ -87,3 +87,11 @@ deleteAction.delTasks();
 // check addData where you added
 // Double check class and id names
 // Why is it only working for one project?
+
+
+// How to load from localstorage the date and the current date and get the difference.
+// Also why is the first one that I made not working when I put in the dates?
+
+// When clicking the modal. Show the full name of the task
+
+// Issue with time difference, could be time zone difference?
