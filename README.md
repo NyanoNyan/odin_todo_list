@@ -2,8 +2,8 @@
 
 Link: https://nyanonyan.github.io/odin_todo_list/
 
-#### Will be putting in objects design
+##### - Will be putting in objects design
 
 
-##### Futher implementations 
+##### - Futher implementations 
 Delete buttons on each projects.
