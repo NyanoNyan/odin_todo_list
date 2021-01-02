@@ -6,7 +6,7 @@ import {compareAsc, format} from 'date-fns'
 function getTask() {
     
     let textText = document.getElementById('form-input');
-
+    
 
     let storeDataTest = storeData();
     let test = addDOM();
@@ -98,21 +98,38 @@ function clearText (id) {
     document.getElementById(id).value = "";
 }
 
-function getDate () {
+function getDate (modalContent) {
 
     let storeData1 = storeData();
     // Test with diff dates
     let addDate1 = addDate();
-    let dateForm = document.getElementsByClassName('date-form');
-    let modal = document.getElementById("myModal");
 
-    Array.from(dateForm).forEach(function (dateForm1) {
-        dateForm1.addEventListener('submit', collectDate);
-    });
+    // let dateForm = document.getElementsByClassName('date-form');
+    // let modal = document.getElementById("myModal");
 
+    // console.log(modalContent.childNodes[1])
+
+    // Get the specific form that is inside the task element
+    let test_capture = modalContent.childNodes[1];
+    // console.log(test_capture)
+
+    test_capture.addEventListener('submit', collectDate);
+
+    // Array.from(dateForm).forEach(function (dateForm1) {
+    //     dateForm1.addEventListener('submit', collectDate);
+
+    // });
+
+    // Need to find out if the submit is the correct submit since it's looping through the whole array.
+    // if not need to get that specific clicked dom node form.
+
+    // Need the node. 
+
+    // Should go, click task, open span, get the data fields of span which has submit, put event listener on that
+    
 
     function collectDate(e) {
-
+        // alert('hello')
         e.preventDefault();
 
         // Get the specific clicked butons date-date value
@@ -144,6 +161,7 @@ function getDate () {
     }
 
 }
+
 
 
 export {
