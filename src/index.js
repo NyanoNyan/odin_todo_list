@@ -39,7 +39,7 @@ repopulateData.getData();
 addDate1.setDate()
 
 // Testing
-getDate()
+// getDate()
 
 // Gets the data from form submition
 getTask();
@@ -95,3 +95,5 @@ deleteAction.delTasks();
 // Issue with time difference, could be time zone difference?
 
 // When clicking the modal. Show the full name of the task
+
+// Have to click sumbit twice for due date
