@@ -5,16 +5,10 @@
 
     <meta charset="utf-8" />
     <title>ToDo List App</title>
-    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="/src/style/style.css">
 
   </head>
 
-  <style>
-  body {
-     background-image: url(img/september-3614870_1280.jpg);
-  }
-  </style>
-  
   <body>
         <div class="container_head">
             <h1>To Do Tasks</h1>
@@ -29,11 +23,11 @@
 
                 <ul >    
                         <h4>Projects</h4>
-                        
+                        <div>
                             <form id="project-form" class="add-form">
-                                <input id="form-input-project" type="text" class="add-project" placeholder="+ Add a new Project" size="14">
+                                <input id="form-input-project" type="text" class="add-project" placeholder="+ Add a new Project" required size="14" required />
                             </form>
-                        
+                        </div>
                         <div id="sidebar-tasks">
                             <li >
                                 <button class="proj-name">Today</button>
@@ -54,7 +48,7 @@
                 <h4 class="h4-content">Today Tasks</h4>
                     <div>
                         <form id="task-form" class="add-form">
-                            <input id="form-input" type="text" class="add-task" placeholder="+ Add a task">
+                            <input id="form-input" type="text" class="add-task" placeholder="+ Add a task" required>
                         </form>
                     </div>
                     
